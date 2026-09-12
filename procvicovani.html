@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interaktivní kvíz na poznávání chemického skla a laboratorního nádobí.">
+  <title>Chemické sklo – procvičování</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="practice.js" defer></script>
+</head>
+<body>
+  <main class="page">
+    <nav class="back-nav"><a href="index.html">← Procvičování / test</a></nav>
+    <section class="game-card" id="startScreen" aria-labelledby="startTitle">
+      <div class="mascot" aria-hidden="true">⚗</div>
+      <div>
+        <h2 id="startTitle">Procvičování</h2>
+        <p>10 otázek. Bez kódu. Můžeš zkoušet znovu.</p>
+        <button class="primary-btn" type="button" id="startBtn">Spustit hru</button>
+      </div>
+    </section>
+
+    <div id="practiceShell" class="test-shell practice-shell hidden">
+      <div class="attempt-banner"><strong>PROCVIČOVÁNÍ</strong></div>
+    <section class="quiz hidden" id="quizScreen" aria-live="polite">
+      <div class="topline">
+        <div>
+          <p class="eyebrow">Otázka <span id="questionNumber">1</span>/10</p>
+        </div>
+        <div class="score-pill" aria-label="Počet správných odpovědí">✓ <span id="scoreNow">0</span>/10</div>
+      </div>
+
+      <h2 id="questionText" tabindex="-1">kádinka</h2>
+
+      <div class="progress" aria-hidden="true">
+        <span id="progressBar"></span>
+      </div>
+
+      <div class="choice-grid" id="choices" aria-label="Možnosti odpovědi"></div>
+
+      <div class="feedback" id="feedback" role="status"></div>
+      <div class="actions"><button class="primary-btn hidden" id="nextBtn" type="button">Další otázka →</button></div>
+    </section>
+
+    <section class="results hidden" id="resultScreen" aria-labelledby="resultTitle">
+      <div class="result-head">
+        <div>
+          <h2 id="resultTitle">Výsledky</h2>
+          <p id="resultMessage"></p>
+        </div>
+        <div class="big-score" id="finalScore">0/10</div>
+      </div>
+
+      <div class="legend" aria-label="Legenda výsledků">
+        <span><i class="ok"></i> správně</span>
+        <span><i class="bad"></i> špatně</span>
+      </div>
+
+      <div class="result-list" id="resultList"></div>
+
+      <div class="actions">
+        <button class="primary-btn" type="button" id="againBtn">Hrát znovu</button>
+      </div>
+    </section>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Chemické sklo – procvičování a test</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .welcome{max-width:760px;margin:5vh auto;padding:38px;text-align:center;background:#fffffff0;border-radius:24px;box-shadow:0 18px 55px #254a7018}
+    .welcome h1{font-size:clamp(28px,5vw,42px);line-height:1.15;margin:8px 0 14px;letter-spacing:-.03em}
+    .mode-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:28px 0 0}
+    .mode-choice{display:flex;flex-direction:column;align-items:center;gap:10px;padding:24px 16px;background:#edf8f4;border:2px solid #bde0d7;border-radius:16px;color:#1d564e;text-decoration:none;cursor:pointer;font:inherit;font-weight:700}
+    .mode-choice.test{background:#e5f5ec;border-color:#86bba0;color:#22724e}.mode-choice:hover{border-color:#459d9a}.mode-icon{font-size:34px}.mode-choice strong{font-size:21px}.mode-choice small{font-size:14px;font-weight:400;line-height:1.5}
+    .test-panel{margin-top:24px;padding:24px;background:#f2faf5;border-radius:16px}.test-panel h2{font-size:25px}.test-panel label{display:block;margin:18px 0 8px;font-weight:700}.test-panel input{display:block;margin:8px auto 18px;width:min(260px,100%);padding:14px;border:2px solid #c2decd;border-radius:10px;font:700 24px monospace;text-align:center;letter-spacing:.1em}
+    .test-panel input.name-input{font:17px system-ui;letter-spacing:0;width:min(360px,100%)}.status{color:#963854;font-size:14px;min-height:20px}.welcome .eyebrow{justify-content:center}
+    @media(max-width:550px){.welcome{padding:26px 18px;margin-top:20px}.mode-grid{gap:12px}.mode-choice{padding:20px 8px}.mode-choice strong{font-size:18px}.mode-choice small{font-size:12px}}
+  </style>
+</head>
+<body><main class="page">
+  <section class="welcome" aria-labelledby="title">
+    <p class="eyebrow">Poznej laboratoř</p><h1 id="title">Chemické sklo<br>a pomůcky</h1>
+    <p>Vyber si, jestli chceš trénovat, nebo vyplnit test.</p>
+    <div class="mode-grid">
+      <a class="mode-choice" href="procvicovani.html"><span class="mode-icon" aria-hidden="true">⚗</span><strong>Procvičování</strong><small>Bez kódu.<br>Zkoušej znovu a znovu.</small></a>
+      <button class="mode-choice test" id="testMode" type="button" aria-expanded="false" aria-controls="testPanel"><span class="mode-icon" aria-hidden="true">✓</span><strong>Test</strong><small>Vlastní kód.<br>Jeden pokus · A / B.</small></button>
+    </div>
+    <section class="test-panel hidden" id="testPanel" aria-labelledby="testTitle">
+      <h2 id="testTitle">Zadej svůj kód</h2><p>Variantu A nebo B dostaneš podle přiděleného kódu.</p>
+      <form id="testForm" method="post">
+        <label for="studentName">Jméno a příjmení</label><input name="studentName" id="studentName" class="name-input" type="text" autocomplete="name" required minlength="3" maxlength="100" placeholder="Jana Nováková" aria-describedby="testStatus">
+        <label for="code">Kód od učitele</label><input name="code" id="code" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" required minlength="6" maxlength="9" pattern="[0-9 ]{6,9}" placeholder="482 731" aria-describedby="testStatus">
+        <button class="primary-btn" type="submit" id="beginTest">Zahájit / pokračovat →</button>
+      </form><p id="testStatus" class="status" role="status"></p>
+    </section>
+  </section>
+</main>
+<script>
+// Sem doplňte adresu Google aplikace zakončenou /exec.
+const TEST_URL='DOPLNTE_ADRESU_GOOGLE_APLIKACE';
+const ready=/^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec$/.test(TEST_URL);
+const panel=document.querySelector('#testPanel'),form=document.querySelector('#testForm'),input=document.querySelector('#code'),status=document.querySelector('#testStatus');
+if(ready)form.action=TEST_URL;
+document.querySelector('#testMode').addEventListener('click',()=>{
+  panel.classList.remove('hidden');document.querySelector('#testMode').setAttribute('aria-expanded','true');document.querySelector('#studentName').focus();
+  if(!ready)status.textContent='Test zatím není dostupný. Procvičování můžeš spustit.';
+});
+form.addEventListener('submit',event=>{
+  const code=input.value.replace(/\s/g,'');
+  const name=document.querySelector('#studentName').value.normalize('NFC').trim().replace(/\s+/g,' ');
+  if(name.length>100||!/^\p{L}[\p{L}\p{M} .’'\-]{2,99}$/u.test(name)||name.split(' ').filter(word=>/\p{L}/u.test(word)).length<2){event.preventDefault();status.textContent='Doplň své jméno a příjmení.';document.querySelector('#studentName').focus();return;}
+  if(!/^\d{6}$/.test(code)){event.preventDefault();status.textContent='Zadej šest číslic ze svého kódu.';input.focus();return;}
+  if(!ready){event.preventDefault();status.textContent='Test zatím není dostupný. Procvičování můžeš spustit.';return;}
+  input.value=code;document.querySelector('#studentName').value=name;document.querySelector('#beginTest').disabled=true;status.textContent='Ověřuji kód…';
+});
+window.addEventListener('pageshow',()=>{document.querySelector('#beginTest').disabled=false;});
+</script>
+</body></html>

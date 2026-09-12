@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640" viewBox="0 0 640 640">
+<g stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5">
+<!-- Barevná baňka -->
+<g opacity=".42" stroke="#169da9"><path fill="#e3f8fa" d="M90 48v45l-32 57q-8 15 10 15h70q18 0 10-15l-32-57V48"/><path fill="#35c5ba" stroke="none" d="M76 126h54l15 27q3 7-7 7H68q-10 0-7-7z"/><path fill="none" d="M84 48h38"/><circle cx="99" cy="117" r="4" fill="#35c5ba" stroke="none"/></g>
+<!-- Molekulární struktura -->
+<g opacity=".23" fill="none" stroke="#8b5acb"><path d="M280 90l27-16 27 16v32l-27 16-27-16zM334 90l27-16 27 16v32l-27 16-27-16M388 90l30-18M307 138v32"/><circle cx="418" cy="72" r="5" fill="#8b5acb"/></g>
+<!-- Atom -->
+<g opacity=".36" fill="none" stroke="#d9773b"><circle cx="501" cy="215" r="7" fill="#ffae61"/><ellipse cx="501" cy="215" rx="52" ry="18"/><ellipse cx="501" cy="215" rx="52" ry="18" transform="rotate(60 501 215)"/><ellipse cx="501" cy="215" rx="52" ry="18" transform="rotate(120 501 215)"/></g>
+<!-- Zkumavka -->
+<g opacity=".3" stroke="#5687cc"><path fill="#e7f1ff" d="M87 350h55v68q0 26-28 26t-27-26z"/><path fill="#8bb9ed" stroke="none" d="M91 395h47v23q0 22-24 22t-23-22z"/><path fill="none" d="M125 361h17m-17 14h17"/></g>
+<!-- Prvek periodické tabulky -->
+<g opacity=".19" stroke="#228c73"><rect x="282" y="284" width="68" height="75" rx="8" fill="#bcefe0"/><g fill="#228c73" stroke="none" font-family="monospace"><text x="293" y="309" font-size="12">6</text><text x="302" y="342" font-size="30">C</text></g></g>
+<!-- Spojené molekuly -->
+<g opacity=".32" fill="none" stroke="#d66d9c"><path d="M451 448l28-16 28 16v32l-28 16-28-16zM507 448l28-16 28 16v32l-28 16-28-16"/><circle cx="479" cy="432" r="5" fill="#ef9dbf"/><circle cx="563" cy="480" r="5" fill="#ef9dbf"/></g>
+<!-- Kádinka -->
+<g opacity=".26" stroke="#6c60b8"><path fill="#efebff" d="M288 521h83l-8 9v57q0 8-8 8h-51q-8 0-8-8v-66"/><path fill="#b4a5ec" stroke="none" d="M300 558h59v28q0 5-5 5h-49q-5 0-5-5z"/><path fill="none" d="M344 538h15m-15 12h15m-15 12h15"/></g>
+</g>
+<g font-family="monospace" font-weight="600"><text x="410" y="350" font-size="22" fill="#149ba0" opacity=".25">H₂O</text><text x="61" y="260" font-size="18" fill="#8f61c2" opacity=".18">Na⁺</text><text x="480" y="568" font-size="20" fill="#ce8950" opacity=".32">pH</text></g>
+<g fill="#3eaaa3"><circle cx="210" cy="225" r="4" opacity=".18"/><circle cx="180" cy="540" r="6" opacity=".32"/><circle cx="570" cy="70" r="5" opacity=".2"/></g>
+</svg>
