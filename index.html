@@ -35,7 +35,7 @@
 </main>
 <script>
 // Sem doplňte adresu Google aplikace zakončenou /exec.
-const TEST_URL='DOPLNTE_ADRESU_GOOGLE_APLIKACE';
+const TEST_URL='https://script.google.com/macros/s/AKfycbyqt0VtIgoO4pp8jev4MtGAhsqGBQX9vMUV-uSeDJqjpW7HnyIs8ONgCIXI0pwS5GWS/exec';
 const ready=/^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec$/.test(TEST_URL);
 const panel=document.querySelector('#testPanel'),form=document.querySelector('#testForm'),input=document.querySelector('#code'),status=document.querySelector('#testStatus');
 if(ready)form.action=TEST_URL;
