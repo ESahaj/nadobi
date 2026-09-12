@@ -86,7 +86,6 @@ function startGame() {
 function renderQuestion() {
   const correct = round[currentIndex];
   locked = false;
-  const byUse = currentIndex % 2 === 1;
   // Tyto dva obrázky mohou znázorňovat stejný typ baňky.
   const similar = new Set(["destilační baňka", "frakční baňka"]);
   const wrong = shuffle(tools.filter(item => item.name !== correct.name &&
@@ -95,7 +94,7 @@ function renderQuestion() {
   document.querySelector("#nextBtn").classList.add("hidden");
 
   questionNumber.textContent = currentIndex + 1;
-questionText.textContent = byUse ? correct.hint.charAt(0).toUpperCase() + correct.hint.slice(1) + "." : correct.name;
+  questionText.textContent = correct.name;
   scoreNow.textContent = score;
   feedback.textContent = "Vyber správný obrázek.";
   progressBar.style.width = `${(currentIndex / ROUND_LENGTH) * 100}%`;
@@ -106,7 +105,7 @@ questionText.textContent = byUse ? correct.hint.charAt(0).toUpperCase() + correc
     button.className = "choice";
     button.type = "button";
     button.dataset.name = option.name;
-    button.setAttribute("aria-label", `Možnost ${index + 1}: ${option.name}`);
+    button.setAttribute("aria-label", `Možnost ${String.fromCharCode(65 + index)}`);
     button.innerHTML = `
       <span class="option-letter" aria-hidden="true">${String.fromCharCode(65 + index)}</span>
       <img src="${imagePath(option)}" alt="">
@@ -128,16 +127,16 @@ function chooseAnswer(selected, correct) {
     selected,
     isCorrect,
     prompt: questionText.textContent,
-    byUse: currentIndex % 2 === 1
+    byUse: false
   });
 
   [...choices.children].forEach(button => {
     const label = button.dataset.name;
     button.disabled = true;
     button.querySelector(".answer-label").classList.remove("hidden");
+    button.setAttribute("aria-label", label);
     if (label === correct.name) button.classList.add("is-correct");
     if (label === selected.name && !isCorrect) button.classList.add("is-wrong");
-    if (label !== correct.name && label !== selected.name) button.classList.add("is-muted");
   });
 
   scoreNow.textContent = score;
@@ -145,6 +144,11 @@ function chooseAnswer(selected, correct) {
   feedback.textContent = isCorrect
     ? `Správně! ${correct.name}.`
     : `Správná odpověď: ${correct.name}.`;
+  const usage = document.createElement("p");
+  usage.style.cssText = "margin:10px 0 0;font-size:15px;font-weight:500;line-height:1.5";
+  const hint = correct.hint.charAt(0).toUpperCase() + correct.hint.slice(1).replace(/[.]+$/, "") + ".";
+  usage.textContent = `Použití: ${hint}`;
+  feedback.append(usage);
   const next = document.querySelector("#nextBtn");
   next.textContent = currentIndex === ROUND_LENGTH - 1 ? "Zobrazit výsledky →" : "Další otázka →";
   next.classList.remove("hidden");
@@ -175,7 +179,7 @@ function showResults() {
       <img src="${imagePath(answer.question)}" alt="${answer.question.name}">
       <div>
         <h3>${index + 1}. ${answer.question.name}</h3>
-        <p class="review-prompt">${answer.byUse ? answer.prompt : "Podle názvu"}</p>
+        <p class="review-prompt">Použití: ${answer.question.hint}</p>
         <p>${answer.isCorrect ? "Vybráno správně." : `Tvoje volba: ${answer.selected.name}.`}</p>
       </div>
     `;
